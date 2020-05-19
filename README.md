@@ -22,6 +22,8 @@ Run `zoom delete` to delete a stored meeting
 
 Run `zoom launch [name]` to launch a meeting
 
+Run `zoom list` to see all stored meetings
+
 ## Installation Instructions
 
 1. Download and install .NET Core 3.1: https://dotnet.microsoft.com/download
