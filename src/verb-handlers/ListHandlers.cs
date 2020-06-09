@@ -13,6 +13,8 @@ namespace zoom {
                 Console.WriteLine("No saved zoom meetings.");
                 Console.WriteLine("Run zoom new to save a meeting.");
             } else {
+                Console.WriteLine();
+
                 foreach(string name in dict.Keys) {
                     Console.WriteLine(name + ":");
                     
@@ -20,7 +22,7 @@ namespace zoom {
 
                     if (dict.TryGetValue(name, out meeting)) {
                         Console.WriteLine("  Meeting ID: " + meeting.ID);
-                        Console.WriteLine("  Password ID: " + meeting.Password);
+                        Console.WriteLine("  Password ID: " + (meeting.Password.Length > 0 ? meeting.Password : "N/A"));
                         Console.WriteLine();
                     } else {
                         ConsoleColor defaultColor = Console.ForegroundColor;
@@ -33,6 +35,15 @@ namespace zoom {
                     }
                 }
             }
+
+            return 0;
+        }
+
+        public static int PrintHelpMenu() {
+            ErrorHandler.printVersionInfo();
+            
+            Console.WriteLine("\n Command list:");
+            Console.WriteLine(" No available subcommands\n");
 
             return 0;
         }

@@ -5,20 +5,17 @@ using System.Collections.Generic;
 namespace zoom {
     public class UpdateHandler {
         public static int Run(UpdateOptions options, string[] args) {
-            // if user didn't supply something to change
-            if (options.MeetingID.Length == 0 && options.Password.Length == 0) {
-                ConsoleColor defaultColor = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Didn't supply a meeting id or password to change");
-                Console.WriteLine("Use --id or --password to denote the field to update");
-                Console.ForegroundColor = defaultColor;
+            // parse through args
+            if (options.Name.Length == 0) {
+                List<string> trimmedArgs = new List<string>(args);
+                trimmedArgs.RemoveAll(s => s.StartsWith("-") || s == "update");
 
-                return 1;
+                options.Name = trimmedArgs.Count > 0 ? trimmedArgs[0] : options.Name;
             }
-
+                
             // if user didn't supply name of object to change
             while (options.Name.Length == 0) {
-                Console.Write("Please provide the name of the meeting you'd like to update: ");
+                Console.Write("Name of meeting to update: ");
                 options.Name = Console.ReadLine();
             }
 
@@ -30,8 +27,19 @@ namespace zoom {
 
             // try to update
             if (dict.TryGetValue(options.Name, out meeting)) {
+                // store in new values user supplied
                 meeting.ID = options.MeetingID.Length > 0 ? options.MeetingID : meeting.ID;
                 meeting.Password = options.Password.Length > 0 ? options.Password : meeting.Password;
+
+                // if no change, prompt user
+                if (meeting.ID != options.MeetingID) {
+                    meeting.ID = IOCommands.ReadInputWithDefault("Meeting ID: ", meeting.ID);
+                }
+
+                // if no change, prompt user
+                if (meeting.Password != options.Password || meeting.Password.Length == 0) {
+                    meeting.Password = IOCommands.ReadInputWithDefault("Meeting password: ", meeting.Password);
+                }
 
                 // attempt to update
                 dict.Remove(options.Name);
@@ -44,6 +52,17 @@ namespace zoom {
 
                 return 1;
             }
+        }
+
+        public static int PrintHelpMenu() {
+            ErrorHandler.printVersionInfo();
+            
+            Console.WriteLine("\n Command update:");
+            Console.WriteLine("\n  --id\t\t\tmeeting ID");
+            Console.WriteLine("\n  -p, --password\tmeeting password");
+            Console.WriteLine("\n  -n, --name\t\tname used to launch meeting\n");
+
+            return 0;
         }
     }
 }

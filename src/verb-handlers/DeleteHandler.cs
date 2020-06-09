@@ -12,11 +12,20 @@ namespace zoom {
 
             // if user didn't supply name of object to delete
             while (nameToDelete.Length == 0) {
-                Console.Write("Please provide the name of the meeting you'd like to delete: ");
+                Console.Write("Name of meeting to delete: ");
                 nameToDelete = Console.ReadLine();
             }
 
             MeetingFile.RemoveMeeting(nameToDelete);
+            return 0;
+        }
+
+        public static int PrintHelpMenu() {
+            ErrorHandler.printVersionInfo();
+            
+            Console.WriteLine("\n Command delete:");
+            Console.WriteLine("\n  [name]\tname of meeting to delete\n");
+
             return 0;
         }
     }

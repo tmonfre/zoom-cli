@@ -4,7 +4,7 @@ namespace zoom {
 
     [Verb("update", HelpText = "Update recurring link")]
     public class UpdateOptions {
-        [Option('n', "name", Default = "", HelpText = "Name used to launch meeting", Required = true)]
+        [Option('n', "name", Default = "", HelpText = "Name used to launch meeting")]
         public string Name { get; set; }
 
         [Option("id", Default = "", HelpText = "Meeting ID")]
