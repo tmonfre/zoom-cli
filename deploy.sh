@@ -24,7 +24,7 @@ mv zoom.tar.gz bin
 # upload to server
 rm -rf ../personal-server/static/zoom.tar.gz
 cp bin/zoom.tar.gz ../personal-server/static/zoom.tar.gz 
-cd ../personal-server/static/zoom.tar.gz
+cd ../personal-server
 git add -A 
 git commit -m "update zoom.tar.gz"
 git push
@@ -34,7 +34,7 @@ cd ../zoom
 make uninstall
 
 # generate sha256 signature and update in homebrew repository
-shatmp="    sha256 \"$(shasum -a 256 bin/zoom.tar.gz | awk '{printf $1}')\""
+shatmp="    sha256 \"$(shasum -a 256 ../personal-server/static/zoom.tar.gz | awk '{printf $1}')\""
 sed -i.bak "5s/.*/$shatmp/" ../homebrew-tmonfre/zoom.rb 
 unset shatmp
 
