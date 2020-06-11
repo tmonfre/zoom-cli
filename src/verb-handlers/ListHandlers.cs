@@ -28,7 +28,6 @@ namespace zoom {
                         ConsoleColor defaultColor = Console.ForegroundColor;
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Encountered an error reading the stored data.");
-                        Console.WriteLine("Run zoom clean to clear all stored data.");
                         Console.ForegroundColor = defaultColor;
 
                         return 1;
