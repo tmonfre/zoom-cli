@@ -12,6 +12,8 @@ namespace zoom {
                     return printHelpInfo();
                 } else if (err.GetType() == typeof(BadVerbSelectedError)) {
                     return handleBadVerb(args);
+                } else if (err.GetType() == typeof(NoVerbSelectedError)) {
+                    return printHelpInfo();
                 }
             }
             

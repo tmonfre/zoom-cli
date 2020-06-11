@@ -13,4 +13,6 @@ uninstall:
 update:
 	make uninstall
 	make install
-	
+
+deploy:
+	./deploy.sh
