@@ -19,8 +19,10 @@ namespace zoom {
                 meeting.ID = Console.ReadLine();
             }
 
-            Console.Write("Password: ");
-            meeting.Password = Console.ReadLine();
+            if (meeting.Password.Length == 0) {
+                Console.Write("Password: ");
+                meeting.Password = Console.ReadLine();
+            }
 
             return Convert.ToInt32(MeetingFile.AddMeeting(name, meeting));
         }

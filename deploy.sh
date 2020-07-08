@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ $# -eq 0 ]; then
+    echo "Please provide version to update"
+    exit 1
+fi
+
 # run dotnet installation
 if hash zoom 2>/dev/null; then
     make update
@@ -38,6 +43,11 @@ shatmp="    sha256 \"$(shasum -a 256 ../personal-server/static/zoom.tar.gz | awk
 sed -i.bak "5s/.*/$shatmp/" ../homebrew-tmonfre/zoom.rb 
 unset shatmp
 
+# update versions in homebrew repository
+versiontemp="    version \"$1\""
+sed -i.bak "6s/.*/$versiontemp/" ../homebrew-tmonfre/zoom.rb 
+unset versiontemp
+
 # push homebrew repo
 cd ../homebrew-tmonfre
 git add -A
@@ -46,4 +56,5 @@ git push
 cd ../zoom
 
 # send done message
+clear
 echo "Successfully uploaded to server and updated homebrew tap"
