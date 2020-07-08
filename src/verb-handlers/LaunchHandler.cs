@@ -97,6 +97,11 @@ namespace zoom {
                     url = "zoommtg://zoom.us/join?zc=0&stype=100&confno=" + s;
                 }
 
+                // attach password if link user sent contains one
+                if (url.Contains("?pwd=")) {
+                    url = url.Replace("?pwd=", "&pwd=");
+                }
+
                 // if passed checks and have a URL, try it out, otherwise fail back to menu
                 if (url != null) {
                     Process.Start("open", url);
