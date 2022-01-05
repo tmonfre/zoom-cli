@@ -4,7 +4,7 @@ from click_default_group import DefaultGroup
 from PyInquirer import prompt
 
 from commands import _edit, _launch_url, _launch_name, _ls, _remove, _save_url, _save_id_password
-from utils import ZOOM_CLI_DIR, SAVE_FILE_PATH
+from utils import ZOOM_CLI_DIR, SAVE_FILE_PATH, get_meeting_names
 
 @click.group(cls=DefaultGroup, default='launch', default_if_no_args=True)
 def main():
@@ -87,9 +87,10 @@ def edit(name, url, id, password):
     # prompt name if not provided
     if not name:
         name = prompt({
-            'type': 'input',
+            'type': 'list',
             'name': 'name',
             'message': 'Meeting name:',
+            'choices': get_meeting_names()
         })["name"]
 
     _edit(name, url, id, password)

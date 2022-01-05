@@ -33,6 +33,9 @@ def get_meeting_file_contents():
     except:
         return {}
 
+def get_meeting_names():
+    return sorted(get_meeting_file_contents().keys())
+
 def write_to_meeting_file(contents):
     with open(SAVE_FILE_PATH, "w") as file:
         file.write(dict_to_json_string(contents))
