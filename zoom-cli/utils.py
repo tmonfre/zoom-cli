@@ -17,6 +17,22 @@ class ConsoleColor:
    UNDERLINE = '\033[4m'
    END = '\033[0m'
 
+def dict_to_json_string(dict):
+    def dumper(obj):
+        try:
+            return obj.toJSON()
+        except:
+            return obj.__dict__
+
+    return json.dumps(dict, default=dumper, indent=2)
+
 def get_meeting_file_contents():
-    with open(SAVE_FILE_PATH, "r") as file:
-        return json.loads(file.read())
+    try:
+        with open(SAVE_FILE_PATH, "r") as file:
+            return json.loads(file.read())
+    except:
+        return {}
+
+def write_to_meeting_file(contents):
+    with open(SAVE_FILE_PATH, "w") as file:
+        file.write(dict_to_json_string(contents))
