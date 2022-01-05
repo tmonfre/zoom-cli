@@ -96,8 +96,17 @@ def edit(name, url, id, password):
     _edit(name, url, id, password)
 
 @main.command(help="Delete meeting")
-@click.argument('name')
+@click.argument('name', required=False)
 def rm(name):
+    # prompt name if not provided
+    if not name:
+        name = prompt({
+            'type': 'list',
+            'name': 'name',
+            'message': 'Meeting name:',
+            'choices': get_meeting_names()
+        })["name"]
+
     _remove(name)
 
 @main.command(help="List all saved meetings")
