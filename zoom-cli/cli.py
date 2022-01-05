@@ -4,9 +4,7 @@ from click_default_group import DefaultGroup
 from PyInquirer import prompt
 
 from commands import _edit, _launch_url, _launch_name, _ls, _remove, _save_url, _save_id_password
-
-ZOOM_CLI_DIR = os.path.expanduser("~/.zoom-cli-new")
-SAVE_FILE_PATH = "{}/meetings.json".format(ZOOM_CLI_DIR)
+from utils import ZOOM_CLI_DIR, SAVE_FILE_PATH
 
 @click.group(cls=DefaultGroup, default='launch', default_if_no_args=True)
 def main():

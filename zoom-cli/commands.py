@@ -1,3 +1,5 @@
+from utils import ConsoleColor, get_meeting_file_contents
+
 def _launch_url(url):
     print("LAUNCH URL | url: {}".format(url))
 
@@ -17,4 +19,11 @@ def _remove(name):
     print("REMOVE | name: {}".format(name))
 
 def _ls():
-    print("LIST")
+    meetings = get_meeting_file_contents()
+
+    for (name, entries) in meetings.items():
+        print(ConsoleColor.BOLD + name + ConsoleColor.END)
+        if "url" in entries: print(ConsoleColor.BOLD + "    url: " + ConsoleColor.END + entries["url"])
+        if "id" in entries: print(ConsoleColor.BOLD + "    id: " + ConsoleColor.END + entries["id"])
+        if "password" in entries: print(ConsoleColor.BOLD + "    password: " + ConsoleColor.END + entries["password"])
+        print()
