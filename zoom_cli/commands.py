@@ -1,7 +1,7 @@
 import os
 from PyInquirer import prompt
 
-from utils import ConsoleColor, get_meeting_file_contents, write_to_meeting_file, launch_zoommtg
+from zoom_cli.utils import ConsoleColor, get_meeting_file_contents, write_to_meeting_file, launch_zoommtg
 
 def _launch_url(url):
     try:

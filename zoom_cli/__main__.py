@@ -1,21 +1,14 @@
-import os
 import click
 from click_default_group import DefaultGroup
 from PyInquirer import prompt
 
-from commands import _edit, _launch_url, _launch_name, _ls, _remove, _save_url, _save_id_password
-from utils import ZOOM_CLI_DIR, SAVE_FILE_PATH, get_meeting_names
+from zoom_cli.commands import _edit, _launch_url, _launch_name, _ls, _remove, _save_url, _save_id_password
+from zoom_cli.utils import get_meeting_names, __version__
 
 @click.group(cls=DefaultGroup, default='launch', default_if_no_args=True)
+@click.version_option(__version__)
 def main():
-    if not os.path.isdir(ZOOM_CLI_DIR):
-        print("making directory")
-        os.makedirs(ZOOM_CLI_DIR)
-
-    if not os.path.exists(SAVE_FILE_PATH):
-        print("writing to file")
-        with open(SAVE_FILE_PATH,'w+') as file:
-            file.write("{}")
+    pass
 
 @main.command(help="Launch meeting [url or saved meeting name]")
 @click.argument('url_or_name')

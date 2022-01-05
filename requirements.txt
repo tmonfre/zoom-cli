@@ -1,8 +1,12 @@
+altgraph==0.17.2
 click==8.0.3
 click-default-group==1.2.2
+macholib==1.15.2
 prompt-toolkit==1.0.14
 Pygments==2.11.1
 PyInquirer==1.0.3
+pyinstaller==4.7
+pyinstaller-hooks-contrib==2021.4
 regex==2021.11.10
 six==1.16.0
 wcwidth==0.2.5

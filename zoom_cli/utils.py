@@ -1,7 +1,9 @@
 import os
 import json
 
-ZOOM_CLI_DIR = os.path.expanduser("~/.zoom-cli-new")
+__version__ = "1.1.0"
+
+ZOOM_CLI_DIR = os.path.expanduser("~/.zoom-cli")
 SAVE_FILE_PATH = "{}/meetings.json".format(ZOOM_CLI_DIR)
 
 # adopted from: https://stackoverflow.com/questions/8924173/how-do-i-print-bold-text-in-python
