@@ -49,7 +49,16 @@ This package is currently not yet available on Scoop. Please follow the develope
 
 Interested in contributing? Follow the steps below to install the project locally. Feel free to address any open issues, bug fixes, or feature requests by opening a pull request and adding `@tmonfre` as a reviewer.
 
-1. Ensure you have `python3` installed on your operating system
-2. Clone this repository
-3. Run `./cli.py` to test
-4. Run `./build.sh` to build the package. An executable named `zoom` will be generated in the `dist` directory. Move this to somewhere on your `$PATH` to run the command globally.
+1. Ensure you have `python3` installed on your operating system.
+2. Clone this repository.
+3. Create a virtual environment:
+
+    ```shell
+    python3 -m venv ./venv
+    source venv/bin/activate
+    pip3 install -r requirements.txt
+    ```
+
+4. Run `./cli.py` to test
+5. Run `./build.sh` to build the package. An executable named `zoom` will be generated in the `dist` directory. Move this to somewhere on your `$PATH` to run the command globally.
+    - Note: Running this script will also generate a `dist/zoom.tar.gz` file with the zipped contents of `dist/zoom`. The script will output a SHA-256 hash of this file in the terminal. This is used for deployment to Homebrew.
