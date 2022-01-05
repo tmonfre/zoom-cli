@@ -36,3 +36,11 @@ def get_meeting_file_contents():
 def write_to_meeting_file(contents):
     with open(SAVE_FILE_PATH, "w") as file:
         file.write(dict_to_json_string(contents))
+
+def launch_zoommtg(id, password):
+    url = "zoommtg://zoom.us/join?confno=" + id
+
+    if password:
+        url += "&pwd=" + password
+
+    os.system('open "{}"'.format(url))

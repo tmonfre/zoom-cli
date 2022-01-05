@@ -1,10 +1,33 @@
-from utils import ConsoleColor, get_meeting_file_contents, write_to_meeting_file
+import os
+from utils import ConsoleColor, get_meeting_file_contents, write_to_meeting_file, launch_zoommtg
 
 def _launch_url(url):
-    print("LAUNCH URL | url: {}".format(url))
+    try:
+        url_string = url[url.index("/j/") + 3:]
+        id = url_string
+        password = ""
+
+        if "pwd=" in url_string:
+            id = url_string[:url_string.index("pwd=") - 1]
+            password = url_string[url_string.index("pwd=") + 4:]
+
+        launch_zoommtg(id, password)
+        
+    except:
+        print(ConsoleColor.BOLD + "Error:" + ConsoleColor.END, end=' ')
+        print("Unable to launch given URL:  " + ConsoleColor.BOLD + url + ConsoleColor.END + ".")
 
 def _launch_name(name):
-    print("LAUNCH NAME | name: {}".format(name))
+    contents = get_meeting_file_contents()
+
+    if name in contents:
+        launch_zoommtg(
+            contents[name]["id"], 
+            contents[name]["password"] if "password" in contents[name] else ""
+        )
+    else:
+        print(ConsoleColor.BOLD + "Error:" + ConsoleColor.END, end=' ')
+        print("Could not find meeting with title " + ConsoleColor.BOLD + name + ConsoleColor.END + ".")
 
 def _save_url(name, url):
     contents = get_meeting_file_contents()
