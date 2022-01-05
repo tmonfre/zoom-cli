@@ -1,7 +1,7 @@
 import os
 import json
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 ZOOM_CLI_DIR = os.path.expanduser("~/.zoom-cli")
 SAVE_FILE_PATH = "{}/meetings.json".format(ZOOM_CLI_DIR)

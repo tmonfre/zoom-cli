@@ -1,11 +1,11 @@
 #!/bin/bash
-pyinstaller cli.py --name zoom --onefile
+pyinstaller cli.py --name zoom
 
-cd ./dist
+cd ./dist/zoom
 tar zcvf zoom.tar.gz zoom
-cd ../
+cd ../../
 
-sha256="$(shasum -a 256 ./dist/zoom.tar.gz | awk '{printf $1}')"
+sha256="$(shasum -a 256 ./dist/zoom/zoom.tar.gz | awk '{printf $1}')"
 
 echo ""
 echo "#####################################"
