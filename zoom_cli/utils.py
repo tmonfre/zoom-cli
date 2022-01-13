@@ -1,5 +1,6 @@
 import os
 import json
+import subprocess
 
 __version__ = "1.1.3"
 
@@ -42,10 +43,16 @@ def write_to_meeting_file(contents):
     with open(SAVE_FILE_PATH, "w") as file:
         file.write(dict_to_json_string(contents))
 
+def is_command_available(command):
+    s = subprocess.Popen("command -v {}".format(command), shell=True, stdout=subprocess.PIPE)
+    output = s.stdout.read().decode("utf-8")
+    return len(output) > 0
+
 def launch_zoommtg(id, password):
     url = "zoommtg://zoom.us/join?confno=" + id
 
     if password:
         url += "&pwd=" + password
 
-    os.system('open "{}"'.format(url))
+    command = "open" if is_command_available("open") else "xdg-open"
+    os.system('{} "{}"'.format(command, url))
