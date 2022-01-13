@@ -1,10 +1,20 @@
 # Zoom CLI
 
-Do you have multiple recurring Zoom meetings? Are you sick of having to open a calendar invite, find the meeting URL, then open it in your browser? This tool is for you.
-
 `zoom` is a command line tool that allows users to store, access, and launch Zoom meetings on the fly.
 
-It is written in Python and available to install via Homebrew. A previous version of this tool was written in C# with the .NET Core SDK.
+It is written in Python and available to install via Homebrew.
+
+## Installation Instructions
+
+### Mac/Linux Users
+
+1. Download and install Homebrew: [https://brew.sh](https://brew.sh).
+2. `brew tap tmonfre/homebrew-tmonfre`
+3. `brew install zoom`
+
+### PC Users
+
+This package is currently not yet available on Scoop. Please follow the [developer instructions](#developer-instructions) below in the meantime.
 
 ## Usage
 
@@ -32,18 +42,6 @@ Below are the available commands. If an option/flag listed below is ommitted, yo
 - `zoom rm [name]` to delete a stored meeting
 
 - `zoom ls` to see all stored meetings
-
-## Installation Instructions
-
-### Mac Users
-
-1. Download and install Homebrew: [https://brew.sh](https://brew.sh).
-2. `brew tap tmonfre/homebrew-tmonfre`
-3. `brew install zoom`
-
-### PC Users
-
-This package is currently not yet available on Scoop. Please follow the developer instructions below in the meantime.
 
 ## Developer Instructions
 
