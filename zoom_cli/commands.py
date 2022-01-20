@@ -18,12 +18,16 @@ def _launch_name(name):
     if name in contents:
         if "url" in contents[name]:
             url = contents[name]["url"]
-            url_to_launch = url[url.index("://")+3:] if "://" in url else url
+            
+            # grab full id from url, go to end of string or until hit query params
+            id = url[url.index("/j/")+3:min(len(url), url.index("?") if "?" in url else float("inf"))]
+            password = ""
 
-            launch_zoommtg_url(
-                "zoommtg://{}".format(url_to_launch),
-                contents[name]["password"] if "password" in contents[name] else ""
-            )
+            # grab password from url if provided
+            if "pwd=" in url:
+                password = url[url.index("pwd=")+4:min(len(url), url.index("&") if "&" in url else float("inf"))]
+            
+            launch_zoommtg(id, contents[name]["password"] if "password" in contents[name] else password)
         elif "id" in contents[name]:
             launch_zoommtg(
                 contents[name]["id"], 
