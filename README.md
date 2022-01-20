@@ -28,16 +28,16 @@ Below are the available commands. If an option/flag listed below is ommitted, yo
 ### Save Meetings
 
 - `zoom save` to save a new meeting
-  - `-n, --name` for meeting name
-  - `--url` for the meeting URL (must provide this or `--id`)
-  - `--id` for the meeting ID (must provide this or `--url`)
-  - `--password` for the meeting password (optional)
+  - `-n, --name` meeting name
+  - `--id` meeting ID
+  - `--password` meeting password (optional)
+  - `--url` meeting URL (optional, must  provide this or `--id`)
 
 - `zoom edit` to edit a stored meeting
-  - `-n, --name` for meeting name (optional)
-  - `--url` for meeting URL (optional)
-  - `--id` for meeting ID (optional)
-  - `--password` for meeting password (optional)
+  - `-n, --name` meeting name (optional)
+  - `--id` meeting ID (optional)
+  - `--password` meeting password (optional)
+  - `--url` meeting URL (optional)
 
 - `zoom rm [name]` to delete a stored meeting
 
