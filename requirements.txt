@@ -1,6 +1,7 @@
 altgraph==0.17.2
 click==8.0.3
 click-default-group==1.2.2
+decorator==5.1.1
 macholib==1.15.2
 prompt-toolkit==1.0.14
 Pygments==2.11.1

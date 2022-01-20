@@ -1,19 +1,12 @@
 import os
 from PyInquirer import prompt
 
-from zoom_cli.utils import ConsoleColor, get_meeting_file_contents, write_to_meeting_file, launch_zoommtg
+from zoom_cli.utils import ConsoleColor, get_meeting_file_contents, write_to_meeting_file, launch_zoommtg, launch_zoommtg_url
 
 def _launch_url(url):
     try:
-        url_string = url[url.index("/j/") + 3:]
-        id = url_string
-        password = ""
-
-        if "pwd=" in url_string:
-            id = url_string[:url_string.index("pwd=") - 1]
-            password = url_string[url_string.index("pwd=") + 4:]
-
-        launch_zoommtg(id, password)
+        url_to_launch = url[url.index("://")+3:] if "://" in url else url
+        launch_zoommtg_url("zoommtg://{}".format(url_to_launch))
 
     except:
         print(ConsoleColor.BOLD + "Error:" + ConsoleColor.END, end=' ')
@@ -23,17 +16,30 @@ def _launch_name(name):
     contents = get_meeting_file_contents()
 
     if name in contents:
-        launch_zoommtg(
-            contents[name]["id"], 
-            contents[name]["password"] if "password" in contents[name] else ""
-        )
+        if "url" in contents[name]:
+            url = contents[name]["url"]
+            url_to_launch = url[url.index("://")+3:] if "://" in url else url
+
+            launch_zoommtg_url(
+                "zoommtg://{}".format(url_to_launch),
+                contents[name]["password"] if "password" in contents[name] else ""
+            )
+        elif "id" in contents[name]:
+            launch_zoommtg(
+                contents[name]["id"], 
+                contents[name]["password"] if "password" in contents[name] else ""
+            )
+        else:
+            print(ConsoleColor.BOLD + "Error:" + ConsoleColor.END, end=' ')
+            print("No url or id found for meeting with title " + ConsoleColor.BOLD + name + ConsoleColor.END + ".")
     else:
         print(ConsoleColor.BOLD + "Error:" + ConsoleColor.END, end=' ')
         print("Could not find meeting with title " + ConsoleColor.BOLD + name + ConsoleColor.END + ".")
 
-def _save_url(name, url):
+def _save_url(name, url, password):
     contents = get_meeting_file_contents()
     contents[name] = { "url": url }
+    if password: contents[name]["password"] = password
     write_to_meeting_file(contents)
 
 def _save_id_password(name, id, password):

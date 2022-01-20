@@ -13,7 +13,7 @@ def main():
 @main.command(help="Launch meeting [url or saved meeting name]")
 @click.argument('url_or_name')
 def launch(url_or_name):
-    if "https://" in url_or_name and "zoom.us" in url_or_name:
+    if "://" in url_or_name or "zoom.us" in url_or_name:
         _launch_url(url_or_name)
     else:
         _launch_name(url_or_name)
@@ -51,6 +51,14 @@ def save(name, url, id, password):
             'message': 'Zoom URL:',
         })["url"]
 
+    # get password for url if not provided
+    if url and save_as_url == True and "pwd=" not in url:
+        password = prompt({
+            'type': 'input',
+            'name': 'password',
+            'message': 'Meeting password:',
+        })["password"]
+
     # get meeting id and password if saving that way
     if not id and save_as_url == False:
         id_password_choices = prompt([{
@@ -67,7 +75,7 @@ def save(name, url, id, password):
         password = id_password_choices["password"]
 
     if name and url:
-        _save_url(name, url)
+        _save_url(name, url, password)
     elif name and id:
         _save_id_password(name, id, password)
 
