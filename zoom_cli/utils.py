@@ -2,7 +2,7 @@ import os
 import json
 import subprocess
 
-__version__ = "1.1.4"
+__version__ = "1.1.5"
 
 ZOOM_CLI_DIR = os.path.expanduser("~/.zoom-cli")
 SAVE_FILE_PATH = "{}/meetings.json".format(ZOOM_CLI_DIR)
@@ -48,11 +48,11 @@ def is_command_available(command):
     output = s.stdout.read().decode("utf-8")
     return len(output) > 0
 
+def launch_zoommtg_url(url, password=""):
+    url_to_launch = url + "?pwd={}".format(password) if password else url
+    command = "open" if is_command_available("open") else "xdg-open"
+    os.system('{} "{}"'.format(command, url_to_launch))
+
 def launch_zoommtg(id, password):
     url = "zoommtg://zoom.us/join?confno=" + id
-
-    if password:
-        url += "&pwd=" + password
-
-    command = "open" if is_command_available("open") else "xdg-open"
-    os.system('{} "{}"'.format(command, url))
+    launch_zoommtg_url(url, password)
