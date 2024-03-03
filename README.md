@@ -11,6 +11,7 @@ It is written in Python and available to install via Homebrew.
 1. Download and install Homebrew: [https://brew.sh](https://brew.sh).
 2. `brew tap tmonfre/homebrew-tmonfre`
 3. `brew install zoom`
+4. (Only if zoom cask is also installed) `brew link zoom`
 
 ### PC Users
 
